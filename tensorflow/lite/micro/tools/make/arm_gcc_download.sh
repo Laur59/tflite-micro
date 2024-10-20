@@ -90,7 +90,7 @@ else
 
   TEMPDIR=$(mktemp -d)
   TEMPFILE=${TEMPDIR}/temp_file
-  wget ${GCC_URL} -O ${TEMPFILE} >&2
+  curl -L ${GCC_URL} -o ${TEMPFILE} >&2
   check_md5 ${TEMPFILE} ${EXPECTED_MD5}
 
   mkdir ${DOWNLOADED_GCC_PATH}

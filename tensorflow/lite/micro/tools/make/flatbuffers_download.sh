@@ -60,7 +60,7 @@ else
 
   TEMPDIR="$(mktemp -d)"
   TEMPFILE="${TEMPDIR}/${ZIP_PREFIX}.zip"
-  wget ${FLATBUFFERS_URL} -O "$TEMPFILE" >&2
+  curl -L ${FLATBUFFERS_URL} -o "$TEMPFILE" >&2
   check_md5 "${TEMPFILE}" ${FLATBUFFERS_MD5}
 
   unzip -qo "$TEMPFILE" -d "${TEMPDIR}" >&2
