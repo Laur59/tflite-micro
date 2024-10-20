@@ -54,7 +54,7 @@ else
 
   # wget is much faster than git clone of the entire repo. So we wget a specific
   # version and can then apply a patch, as needed.
-  wget ${CMSIS_URL} -O /tmp/${ZIP_PREFIX}.zip >&2
+  curl -L ${CMSIS_URL} -o /tmp/${ZIP_PREFIX}.zip >&2
   check_md5 /tmp/${ZIP_PREFIX}.zip ${CMSIS_MD5}
 
   unzip -qo /tmp/${ZIP_PREFIX}.zip -d /tmp >&2
@@ -65,7 +65,7 @@ else
   CMSIS_DFP_URL="http://github.com/ARM-software/Cortex_DFP/archive/${ZIP_PREFIX}.zip"
   CMSIS_DFP_MD5="3cbb6955b6d093a2fe078ef2341f6b89"
 
-  wget ${CMSIS_DFP_URL} -O /tmp/${ZIP_PREFIX}.zip >&2
+  curl -L ${CMSIS_DFP_URL} -o /tmp/${ZIP_PREFIX}.zip >&2
   check_md5 /tmp/${ZIP_PREFIX}.zip ${CMSIS_DFP_MD5}
 
   unzip -qo /tmp/${ZIP_PREFIX}.zip -d /tmp >&2

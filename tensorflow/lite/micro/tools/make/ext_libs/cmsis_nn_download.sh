@@ -54,7 +54,7 @@ elif [ -d ${DOWNLOADED_CMSIS_NN_PATH} ]; then
 else
   # wget is much faster than git clone of the entire repo. So we wget a specific
   # version and can then apply a patch, as needed.
-  wget ${CMSIS_NN_URL} -O /tmp/${ZIP_PREFIX_NN}.zip >&2
+  curl -L ${CMSIS_NN_URL} -o /tmp/${ZIP_PREFIX_NN}.zip >&2
   check_md5 /tmp/${ZIP_PREFIX_NN}.zip ${CMSIS_NN_MD5}
 
   unzip -qo /tmp/${ZIP_PREFIX_NN}.zip -d /tmp >&2
