@@ -92,7 +92,101 @@ py_test(
     deps = [
         "metadata_py",
         "@flatbuffers//:runtime_py",
-        requirement("hexdump"),
+        requirement("tensorflow"),
+    ],
+)
+
+py_binary(
+    name = "compress",
+    srcs = [
+        "compress.py",
+    ],
+    deps = [
+        ":metadata_py",
+        ":model_facade",
+        ":spec",
+        "@absl_py//absl:app",
+        "@absl_py//absl/flags",
+        "@flatbuffers//:runtime_py",
+        requirement("bitarray"),
+        requirement("numpy"),
+    ],
+)
+
+py_test(
+    name = "compress_test",
+    size = "small",
+    srcs = [
+        "compress_test.py",
+    ],
+    deps = [
+        ":compress",
+        ":metadata_py",
+        ":model_facade",
+        ":spec",
+        ":test_models",
+        "//tensorflow/lite/python:schema_py",
+        requirement("bitarray"),
+        requirement("numpy"),
+        requirement("tensorflow"),
+    ],
+)
+
+py_library(
+    name = "model_facade",
+    srcs = ["model_facade.py"],
+    deps = [
+        "//tensorflow/lite/python:schema_py",
+        requirement("flatbuffers"),
+    ],
+)
+
+py_test(
+    name = "model_facade_test",
+    size = "small",
+    srcs = ["model_facade_test.py"],
+    deps = [
+        ":model_facade",
+        ":test_models",
+        requirement("tensorflow"),
+    ],
+)
+
+py_library(
+    name = "spec",
+    srcs = ["spec.py"],
+    deps = [
+        requirement("pyyaml"),
+    ],
+)
+
+py_test(
+    name = "spec_test",
+    size = "small",
+    srcs = ["spec_test.py"],
+    deps = [
+        ":spec",
+        requirement("tensorflow"),
+    ],
+)
+
+py_library(
+    name = "test_models",
+    srcs = ["test_models.py"],
+    deps = [
+        "//tensorflow/lite/python:schema_py",
+        requirement("flatbuffers"),
+        requirement("numpy"),
+    ],
+)
+
+py_test(
+    name = "test_models_test",
+    size = "small",
+    srcs = ["test_models_test.py"],
+    deps = [
+        ":test_models",
+        "//tensorflow/lite/python:schema_py",
         requirement("tensorflow"),
     ],
 )
