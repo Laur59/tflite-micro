@@ -1,3 +1,5 @@
+"""TfLite Micro BUILD options."""
+
 def tflm_copts():
     """Returns the default copts for targets in TFLM.
 
@@ -6,6 +8,7 @@ def tflm_copts():
     be useful when additively overriding the defaults for a particular target.
     """
     return [
+        "-fno-asynchronous-unwind-tables",
         "-fno-exceptions",
         "-Wall",
         "-Wno-unused-parameter",
