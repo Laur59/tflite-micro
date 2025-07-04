@@ -53,7 +53,7 @@ else
 
   # wget is much faster than git clone of the entire repo. So we wget a specific
   # version and can then apply a patch, as needed.
-  wget ${PRINTF_URL} -O /tmp/${ZIP_PREFIX}.zip >&2
+  curl -L ${PRINTF_URL} -o /tmp/${ZIP_PREFIX}.zip >&2
   check_md5 /tmp/${ZIP_PREFIX}.zip ${PRINTF_MD5}
 
   unzip -qo /tmp/${ZIP_PREFIX}.zip -d /tmp >&2
