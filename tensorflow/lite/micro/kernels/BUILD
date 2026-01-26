@@ -10,6 +10,7 @@ load(
 )
 load(
     "//tensorflow/lite/micro:build_def.bzl",
+    "INCOMPATIBLE_WITH_WINDOWS",
     "tflm_cc_library",
     "tflm_cc_test",
     "tflm_copts",
@@ -533,6 +534,7 @@ tflm_cc_test(
     srcs = [
         "broadcast_args_test.cc",
     ],
+    target_compatible_with = INCOMPATIBLE_WITH_WINDOWS,
     deps = [
         ":kernel_runner",
         "//tensorflow/lite/c:common",
@@ -547,6 +549,7 @@ tflm_cc_test(
     srcs = [
         "broadcast_to_test.cc",
     ],
+    target_compatible_with = INCOMPATIBLE_WITH_WINDOWS,
     deps = [
         ":kernel_runner",
         "//tensorflow/lite/c:common",
@@ -900,6 +903,7 @@ tflm_cc_test(
 tflm_cc_test(
     name = "expand_dims_test",
     srcs = ["expand_dims_test.cc"],
+    target_compatible_with = INCOMPATIBLE_WITH_WINDOWS,
     deps = [
         ":kernel_runner",
         "//tensorflow/lite/c:common",
@@ -915,6 +919,7 @@ tflm_cc_test(
     srcs = [
         "fill_test.cc",
     ],
+    target_compatible_with = INCOMPATIBLE_WITH_WINDOWS,
     deps = [
         ":kernel_runner",
         "//tensorflow/lite/c:common",
@@ -1127,6 +1132,7 @@ tflm_cc_test(
     srcs = [
         "lstm_eval_test.cc",
     ],
+    target_compatible_with = INCOMPATIBLE_WITH_WINDOWS,
     deps = [
         ":lstm_eval_test_lib",
         "//tensorflow/lite/micro:debug_log",
@@ -1576,6 +1582,7 @@ tflm_cc_test(
     srcs = [
         "unidirectional_sequence_lstm_test.cc",
     ],
+    target_compatible_with = INCOMPATIBLE_WITH_WINDOWS,
     deps = [
         ":kernel_runner",
         ":lstm_eval_test_lib",

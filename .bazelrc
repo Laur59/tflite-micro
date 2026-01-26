@@ -27,23 +27,40 @@ build --workspace_status_command=./tools/workspace_status.sh
 # TODO(b/315853820): Needed for Bazel 7.0, until migrated to bzlmod
 build --noenable_bzlmod
 
-# Use the following C++ standard
-build --cxxopt -std=c++17
+# Automatically enable the config matching the host OS
+common --enable_platform_specific_config
 
-# Treat warnings as errors
-build --copt -Werror
+# Use the following C++ standard
+build:linux --cxxopt=-std=c++17
+build:macos --cxxopt=-std=c++17
+build:windows --cxxopt=/std:c++17
+build:windows --experimental_strict_action_env
+build:windows --features=compiler_param_file
 
 # Common options for --config=ci
 build:ci --action_env=CC=clang
 build:ci --action_env=CXX=clang++
-build:ci --curses=no 
-build:ci --color=no 
+build:ci --curses=no
+build:ci --color=no
 build:ci --noshow_progress
 build:ci --noshow_loading_progress
 build:ci --show_timestamps
 build:ci --terminal_columns=0
 build:ci --verbose_failures
 build:ci --test_output=errors
+build:ci --keep_going
+
+# Windows CI options
+build:windows_ci --config=windows
+build:windows_ci --curses=no
+build:windows_ci --color=no
+build:windows_ci --noshow_progress
+build:windows_ci --noshow_loading_progress
+build:windows_ci --show_timestamps
+build:windows_ci --terminal_columns=0
+build:windows_ci --verbose_failures
+build:windows_ci --test_output=errors
+build:windows_ci --keep_going
 
 # When building with the address sanitizer
 # E.g., bazel build --config asan
